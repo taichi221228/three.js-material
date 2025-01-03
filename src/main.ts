@@ -1,8 +1,10 @@
 import "./style.css";
 
 import {
+	DirectionalLight,
 	Mesh,
 	MeshBasicMaterial,
+	MeshLambertMaterial,
 	MeshNormalMaterial,
 	TorusGeometry,
 } from "three";
@@ -12,7 +14,11 @@ const { camera, renderer, scene } = setup();
 
 const geometry = new TorusGeometry(40, 15);
 const color = 0x6699ff;
-const materials = [new MeshBasicMaterial({ color }), new MeshNormalMaterial()];
+const materials = [
+	new MeshBasicMaterial({ color }),
+	new MeshNormalMaterial(),
+	new MeshLambertMaterial({ color }),
+];
 const meshes = [];
 
 for (const [index, material] of materials.entries()) {
@@ -21,6 +27,10 @@ for (const [index, material] of materials.entries()) {
 	meshes.push(mesh);
 	scene.add(mesh);
 }
+
+const directionalLight = new DirectionalLight(0xffffff, 2);
+directionalLight.position.set(1, 1, 1);
+scene.add(directionalLight);
 
 (function render() {
 	requestAnimationFrame(render);
