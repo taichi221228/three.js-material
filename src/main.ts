@@ -1,16 +1,23 @@
 import "./style.css";
 
-import { Mesh, MeshBasicMaterial, TorusGeometry } from "three";
+import {
+	Mesh,
+	MeshBasicMaterial,
+	MeshNormalMaterial,
+	TorusGeometry,
+} from "three";
 import { setup } from "./setup.ts";
 
 const { camera, renderer, scene } = setup();
 
 const geometry = new TorusGeometry(40, 15);
-const materials = [new MeshBasicMaterial({ color: 0x6699ff })];
+const color = 0x6699ff;
+const materials = [new MeshBasicMaterial({ color }), new MeshNormalMaterial()];
 const meshes = [];
 
-for (const material of materials) {
+for (const [index, material] of materials.entries()) {
 	const mesh = new Mesh(geometry, material);
+	mesh.position.x = index * 120;
 	meshes.push(mesh);
 	scene.add(mesh);
 }
