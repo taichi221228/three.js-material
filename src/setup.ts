@@ -7,12 +7,12 @@ export function setup() {
 		canvas: getCanvasElement(),
 	});
 	renderer.setSize(size.width, size.height);
-	renderer.setClearColor(0x6d8196);
+	renderer.setPixelRatio(window.devicePixelRatio);
 
 	const scene = new Scene();
 
-	const camera = new PerspectiveCamera(60, size.width / size.height, 0.1, 100);
-	camera.position.set(0, 0, 8);
+	const camera = new PerspectiveCamera(60, size.width / size.height);
+	camera.position.set(0, 0, 1000);
 
 	return { camera, renderer, scene, size };
 }
